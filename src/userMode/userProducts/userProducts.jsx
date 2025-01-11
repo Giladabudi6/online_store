@@ -26,7 +26,7 @@ const UserProducts = ({ products, categories, user, setUser, users }) => {
 
   const [searchByCategory, setSearchByCategory] = useState("all");
   const [searchByPriceMax, setSearchByPriceMax] = useState(1000);
-  const [searchByPriceMin, setSearchByPriceMin] = useState(0);
+  const [searchByPriceMin, setSearchByPriceMin] = useState(1);
   const [searchByTitle, setSearchByTitle] = useState("all");
 
   // Filter functions
