@@ -51,10 +51,10 @@ Built using **React**, **Firebase**, and **Material UI** for seamless and respon
 
 ## **Screenshots**
 ### Admin Page
-![Admin Page](./images/adminMode.jpg)
+![Admin Page](./imagesReadme/adminMode.jpg)
 
 ### Customer Page
-![Customer Page](./images/customerMode.jpg)
+![Customer Page](./imagesReadme/customerMode.jpg)
 
 ---
 
