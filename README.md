@@ -6,10 +6,15 @@ Built using **React**, **Firebase**, and **Material UI** for seamless and respon
 ---
 
 ## **Features**
-- Manage products: add, update, and delete.
-- Filter products by category, price, and title.
 - Real-time database updates with Firebase.
 - Intuitive and responsive interface using Material UI.
+- **Two Modes of Operation:**
+  - **Admin Mode:**
+    - Add, update, and delete products.
+    - Manage inventory efficiently.
+  - **User Mode:**
+    - Register and log in to the platform.
+    - Browse and purchase products seamlessly.
 
 ---
 
