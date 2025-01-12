@@ -15,13 +15,13 @@ Built using **React**, **Firebase**, and **Material UI** for seamless and respon
     - Add, update, and delete products.
     - Manage inventory efficiently.
 ### Admin Page
-![Admin Page](./images/adminMode.jpg)
+![Admin Page](./imagesReadme/adminMode.jpg)
 
   - **User Mode:**
     - Register and log in to the platform.
     - Browse and purchase products seamlessly.
 ### Customer Page
-![Customer Page](./images/customerMode.jpg)
+![Customer Page](./imagesReadme/customerMode.jpg)
 
 
 ---
