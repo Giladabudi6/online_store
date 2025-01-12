@@ -1,9 +1,11 @@
-# **Online Store Admin Panel**
+# **Online Store Platform: Admin and User Features**
 
-An admin panel for managing products, and users in an online store.  
+An admin panel for managing products and users in an online store, 
+alongside a user interface for registering and purchasing products.  
 Built using **React**, **Firebase**, and **Material UI** for seamless and responsive design.
 
 ---
+
 
 ## **Features**
 - Real-time database updates with Firebase.
@@ -12,9 +14,15 @@ Built using **React**, **Firebase**, and **Material UI** for seamless and respon
   - **Admin Mode:**
     - Add, update, and delete products.
     - Manage inventory efficiently.
+### Admin Page
+![Admin Page](./images/adminMode.jpg)
+
   - **User Mode:**
     - Register and log in to the platform.
     - Browse and purchase products seamlessly.
+### Customer Page
+![Customer Page](./images/customerMode.jpg)
+
 
 ---
 
@@ -54,15 +62,6 @@ Built using **React**, **Firebase**, and **Material UI** for seamless and respon
 
 ---
 
-## **Screenshots**
-### Admin Page
-![Admin Page](./imagesReadme/adminMode.jpg)
-
-### Customer Page
-![Customer Page](./imagesReadme/customerMode.jpg)
-
----
-
 ## **Project Structure**
 ```
 OnlineStore/
@@ -70,6 +69,10 @@ OnlineStore/
 │   ├── adminMode/
 │   │   │── ...
 │   ├── userMode/
+│   │   └── ...
+│   ├── logIn/
+│   │   └── ...
+│   ├── redux/
 │   │   └── ...
 │   ├── firebaseConfig.js
 │   └── App.jsx
