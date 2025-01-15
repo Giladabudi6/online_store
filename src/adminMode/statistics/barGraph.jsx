@@ -108,6 +108,7 @@ const BarGraph = ({ users, products }) => {
             size: 14,
             weight: "bold",
           },
+          stepSize: 1,
         },
       },
     },
