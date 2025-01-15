@@ -15,10 +15,10 @@ const UserMode = () => {
   const [isLoading, setIsLoading] = useState(true);
   const userId = sessionStorage.getItem("userId");
   const navigate = useNavigate();
-  const theme = useTheme(); // שימוש ב-useTheme
-  const [value, setValue] = useState(0); // ניהול כרטיסיה נבחרת
+  const theme = useTheme(); 
+  const [value, setValue] = useState(0); 
 
-  // טעינת נתוני המשתמש
+  // Load user data
   useEffect(() => {
     const fetchUser = async () => {
       const foundUser = users.find((u) => u.id === userId);
@@ -29,8 +29,8 @@ const UserMode = () => {
     fetchUser();
   }, [userId, users]);
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue); // עדכון כרטיסיה נבחרת
+  const handleChange = (newValue) => {
+    setValue(newValue); 
   };
 
   if (isLoading) {
@@ -45,22 +45,22 @@ const UserMode = () => {
     <Container
       maxWidth="false"
       sx={{
-        width: "1200px", // גודל קבוע לרוחב
-        margin: "0 auto", // מרכז את הקונטיינר
-        position: "relative", // המיקום עבור האלמנטים הפנימיים
+        width: "1200px", 
+        margin: "0 auto", 
+        position: "relative", 
       }}
     >
       <Box
         sx={{
           border: `3px solid ${theme.palette.primary.main}`,
-          padding: 3,
+          padding: 2,
           marginTop: 4,
           borderRadius: 2,
           boxShadow: 3,
           backgroundColor: theme.palette.secondary.main,
         }}
       >
-        {/* כפתור יציאה - במיקום ימני עליון */}
+        {/* Log Out button - Top right corner */}
         <Button
           variant="outlined"
           sx={{
@@ -77,16 +77,17 @@ const UserMode = () => {
           Log Out
         </Button>
 
-        {/* כותרת Hello User */}
+        {/* Greeting title */}
         <Typography
           variant="h4"
           align="left"
-          sx={{ marginLeft: "30px", marginBottom: 1 }}
-        >
+          sx={{ marginLeft: "35px", marginBottom: 1, marginTop: 3 }}        >
+                    
+
           Hello {user.firstName}
         </Typography>
 
-        {/* כרטיסיות - במרכז */}
+        {/* Tabs - Centered */}
         <Tabs
           value={value}
           onChange={handleChange}
@@ -98,7 +99,7 @@ const UserMode = () => {
           <Tab label="My Account" />
         </Tabs>
 
-        {/* תוכן לפי כרטיסיה */}
+        {/* Tab content */}
         {value === 0 && (
           <UserProducts
             products={products}
@@ -113,6 +114,6 @@ const UserMode = () => {
       </Box>
     </Container>
   );
-}
+};
 
 export default UserMode;
