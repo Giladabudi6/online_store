@@ -29,7 +29,7 @@ const UserMode = () => {
     fetchUser();
   }, [userId, users]);
 
-  const handleChange = (newValue) => {
+  const handleChange = (event, newValue) => {
     setValue(newValue); 
   };
 
