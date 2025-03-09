@@ -20,28 +20,32 @@ import {
   Paper,
 } from "@mui/material";
 
-const AdminProduct = ({ users, product, products, categories, updateProduct }) => {
+const AdminProduct = ({
+  users,
+  product,
+  products,
+  categories,
+  updateProduct,
+}) => {
   const [updatedProduct, setUpdatedProduct] = useState(product);
 
+  // Handle product update
   const handleUpdateClick = () => {
     const trimmedTitle = updatedProduct.title.trim();
     if (!trimmedTitle) {
       alert("Product title cannot be empty!");
       return;
     }
-
     const price = updatedProduct.price;
     if (price < 0 || isNaN(price)) {
       alert("Product price must be a valid number!");
       return;
     }
-
     const inStock = updatedProduct.inStock;
     if (inStock < 0 || isNaN(inStock)) {
       alert("Product in-store quantity must be a valid number!");
       return;
     }
-
     const isExists = products
       .filter((prod) => prod.id !== updatedProduct.id)
       .some(
@@ -51,33 +55,30 @@ const AdminProduct = ({ users, product, products, categories, updateProduct }) =
       alert("This product already exists!");
       return;
     }
-
     updateProduct({ ...updatedProduct });
   };
 
+  // Create table of users who bought the product
   const boughtByTable = () => {
     const productOrders = users.flatMap((user) =>
       user.orders
         .filter((order) => order.productId === product.id)
         .map((order) => ({
-          name: `${user.firstName}${" "}${user.lastName}`,
+          name: `${user.firstName} ${user.lastName}`,
           date: order.date,
         }))
     );
-
-    // קיבוץ לפי שם ותאריך וספירת כמות ההזמנות
     const groupedOrders = Object.values(
       productOrders.reduce((acc, order) => {
-        const key = `${order.name}-${order.date}`; // מפתח ייחודי לפי שם ותאריך
+        const key = `${order.name}-${order.date}`;
         if (!acc[key]) {
-          acc[key] = { ...order, quantity: 1 }; // יצירת רשומה חדשה עם כמות ראשונית 1
+          acc[key] = { ...order, quantity: 1 };
         } else {
-          acc[key].quantity += 1; // הוספת כמות להזמנות קיימות
+          acc[key].quantity += 1;
         }
         return acc;
       }, {})
     );
-
     if (groupedOrders.length === 0) {
       return (
         <Typography variant="body2" color="text.secondary">
@@ -85,7 +86,6 @@ const AdminProduct = ({ users, product, products, categories, updateProduct }) =
         </Typography>
       );
     }
-
     return (
       <TableContainer
         component={Paper}
@@ -152,10 +152,10 @@ const AdminProduct = ({ users, product, products, categories, updateProduct }) =
     <Box
       sx={{
         display: "flex",
-        flexDirection: "row", // ארגון אופקי
-        justifyContent: "space-between", // פיזור שווה בין העמודות
-        alignItems: "flex-start", // יישור עליון
-        gap: "20px", // מרווח בין העמודות
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "flex-start",
+        gap: "20px",
         padding: "10px",
         border: "1px solid rgb(83, 152, 222)",
         borderRadius: "10px",
@@ -164,11 +164,11 @@ const AdminProduct = ({ users, product, products, categories, updateProduct }) =
         width: "970px",
       }}
     >
-      {/* עמודה שמאלית: שדות ועדכון */}
+      {/* Left column: Product fields and update */}
       <Box
         sx={{
-          flex: "2", // תופס שטח יחסי
-          maxWidth: "300px", // מגביל את הרוחב
+          flex: "2",
+          maxWidth: "300px",
           display: "flex",
           flexDirection: "column",
           gap: "10px",
@@ -180,17 +180,13 @@ const AdminProduct = ({ users, product, products, categories, updateProduct }) =
           label="Title"
           value={updatedProduct.title}
           onChange={(e) =>
-            setUpdatedProduct({
-              ...updatedProduct,
-              title: e.target.value,
-            })
+            setUpdatedProduct({ ...updatedProduct, title: e.target.value })
           }
           fullWidth
           size="small"
           variant="outlined"
           inputProps={{ maxLength: 20 }}
         />
-
         <FormControl fullWidth>
           <InputLabel>Category</InputLabel>
           <Select
@@ -208,7 +204,6 @@ const AdminProduct = ({ users, product, products, categories, updateProduct }) =
             ))}
           </Select>
         </FormControl>
-
         <TextField
           label="Price"
           type="number"
@@ -226,7 +221,6 @@ const AdminProduct = ({ users, product, products, categories, updateProduct }) =
           fullWidth
           size="small"
         />
-
         <TextField
           label="Description"
           value={updatedProduct.description}
@@ -242,68 +236,52 @@ const AdminProduct = ({ users, product, products, categories, updateProduct }) =
           size="small"
           inputProps={{ maxLength: 60 }}
         />
-
-<TextField
-  label="In Stock"
-  type="number"
-  value={updatedProduct.inStock}
-  onChange={(e) => {
-    let value = +e.target.value;
-    if (value < 0) {
-      value = 0;
-    } else if (value > 10000) {
-      value = 10000;
-    }
-    setUpdatedProduct({ ...updatedProduct, inStock: value });
-  }}
-  fullWidth
-  size="small"
-  inputProps={{ min: 0, max: 10000 }}
-/>
-
-
-        <Box
-          sx={{
-            display: "flex",
-            //justifyContent: "space-between",
-            gap: "8px",
-            margin: "auto",
+        <TextField
+          label="In Stock"
+          type="number"
+          value={updatedProduct.inStock}
+          onChange={(e) => {
+            let value = +e.target.value;
+            if (value < 0) {
+              value = 0;
+            } else if (value > 10000) {
+              value = 10000;
+            }
+            setUpdatedProduct({ ...updatedProduct, inStock: value });
           }}
-        >
+          fullWidth
+          size="small"
+          inputProps={{ min: 0, max: 10000 }}
+        />
+        <Box sx={{ display: "flex", gap: "8px", margin: "auto" }}>
           <Button
             variant="contained"
             onClick={handleUpdateClick}
-            sx={{
-              fontSize: "14px",
-              padding: "6px 12px",
-            }}
+            sx={{ fontSize: "14px", padding: "6px 12px" }}
           >
             Save Changes
           </Button>
           <Button
             variant="outlined"
             onClick={() => setUpdatedProduct(product)}
-            sx={{
-              fontSize: "14px",
-              padding: "6px 12px",
-            }}
+            sx={{ fontSize: "14px", padding: "6px 12px" }}
           >
             Cancel
           </Button>
         </Box>
       </Box>
 
-      {/* עמודה מרכזית: טבלה */}
+      {/* Middle column: Table of buyers */}
       <Box
         sx={{
           flex: "2",
-          maxWidth: "360px", // רוחב מירבי לטבלה
-          maxHeight: "300px", // הגובה המקסימלי, ניתן לשנות לפי הצורך
-          overflowY: "auto", // גלילה אנכית אם התוכן גבוה מדי
-          border: "1px solid rgba(0, 0, 0, 0.12)", // תוחם את האזור
+          maxWidth: "360px",
+          maxHeight: "300px",
+          overflowY: "auto",
+          border: "1px solid rgba(0, 0, 0, 0.12)",
           borderRadius: "5px",
-          padding: "10px", // ריווח פנימי
-          backgroundColor: "#f9f9f9", // רקע לטבלה
+          padding: "10px",
+          backgroundColor: "#f9f9f9",
           marginTop: "9px",
           marginBottom: "7px",
         }}
@@ -311,12 +289,10 @@ const AdminProduct = ({ users, product, products, categories, updateProduct }) =
         <Typography variant="body2" sx={{ marginBottom: "10px" }}>
           Bought by:
         </Typography>
-
-        {/* הטבלה */}
         {boughtByTable()}
       </Box>
 
-      {/* עמודה ימנית: תמונה */}
+      {/* Right column: Image upload */}
       <Box
         sx={{
           flex: "1",
@@ -348,7 +324,13 @@ const AdminProduct = ({ users, product, products, categories, updateProduct }) =
         <Button
           variant="outlined"
           component="label"
-          sx={{ fontSize: "14px", padding: "6px 12px", margin: "15px", marginBottom: "2px" ,marginTop: "7px" }}
+          sx={{
+            fontSize: "14px",
+            padding: "6px 12px",
+            margin: "15px",
+            marginBottom: "2px",
+            marginTop: "7px",
+          }}
         >
           Upload New Image
           <input
@@ -370,15 +352,14 @@ const AdminProduct = ({ users, product, products, categories, updateProduct }) =
             }}
           />
         </Button>
-
         {updatedProduct.picture !== product.picture && (
           <Typography variant="caption" color="text.secondary">
             Click &quot;Save Changes&quot; to save
-          </Typography>
+            </Typography>
         )}
       </Box>
     </Box>
   );
-}
+};
 
 export default AdminProduct;
