@@ -50,7 +50,7 @@ Built using **React**, **Firebase**, and **Material UI** for seamless and respon
 
 3. Start the development server:
    ```bash
-   npm run dev
+   npm start
    ```
 
 ---
